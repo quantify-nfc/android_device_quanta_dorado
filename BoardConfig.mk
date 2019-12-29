@@ -21,9 +21,9 @@ ifeq ($(TARGET_ARCH),)
 TARGET_ARCH := arm
 endif
 
-TARGET_COMPILE_WITH_MSM_KERNEL := true
-TARGET_KERNEL_APPEND_DTB := true
-TARGET_KERNEL_CROSS_COMPILE_PREFIX := ${ANDROID_BUILD_TOP}/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
+# TARGET_COMPILE_WITH_MSM_KERNEL := true
+# TARGET_KERNEL_APPEND_DTB := true
+# TARGET_KERNEL_CROSS_COMPILE_PREFIX := ${ANDROID_BUILD_TOP}/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9/bin/arm-linux-androideabi-
 
 BOARD_USES_GENERIC_AUDIO := true
 USE_CAMERA_STUB := true
@@ -36,8 +36,9 @@ TARGET_HAVE_HDMI_OUT := false
 TARGET_USES_OVERLAY := true
 TARGET_USES_PCI_RCS := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-TARGET_NO_BOOTLOADER := false
-TARGET_NO_KERNEL := false
+TARGET_NO_BOOTLOADER := true
+# TODO: Fix kernel
+TARGET_NO_KERNEL := true
 TARGET_NO_RADIOIMAGE := true
 TARGET_NO_RPC := true
 GET_FRAMEBUFFER_FORMAT_FROM_HWC := false
@@ -46,8 +47,8 @@ AUDIO_FEATURE_ENABLED_SPLIT_A2DP := true
 BOOTLOADER_GCC_VERSION := arm-linux-androideabi-4.9
 BOOTLOADER_PLATFORM := msm8909# use msm8952 LK configuration
 
-TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
+# TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
+# TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_CPU_ABI  := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := cortex-a7
@@ -59,12 +60,14 @@ TARGET_HARDWARE_3D := false
 TARGET_BOARD_PLATFORM := msm8909
 TARGET_BOOTLOADER_BOARD_NAME := msm8909
 
+BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_BASE        := 0x80000000
 BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 
-TARGET_USES_UNCOMPRESSED_KERNEL := false
+# Fixes build error
+# TARGET_USES_UNCOMPRESSED_KERNEL := false
 
 # Support to build images for 2K NAND page
 BOARD_KERNEL_2KPAGESIZE := 2048
@@ -138,7 +141,10 @@ TARGET_LDPRELOAD := libNimsWrap.so
 TARGET_PER_MGR_ENABLED := true
 
 #Use dlmalloc instead of jemalloc for mallocs
-MALLOC_IMPL := dlmalloc
+# MALLOC_IMPL := dlmalloc
+
+# Fixes build error
+MALLOC_SVELTE := true
 
 #Enable HW based full disk encryption
 TARGET_HW_DISK_ENCRYPTION := false

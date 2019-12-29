@@ -37,6 +37,9 @@ PRODUCT_BRAND := Android
 PRODUCT_MODEL := dorado
 PRODUCT_MANUFACTURER := Quanta
 
+PLATFORM_VERSION_CODENAME=REL
+PLATFORM_VERSION=8.1.0
+
 ifeq ($(strip $(TARGET_USES_QTIC)),true)
 # font rendering engine feature switch
 -include $(QCPATH)/common/config/rendering-engine.mk
